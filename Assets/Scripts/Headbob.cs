@@ -10,19 +10,18 @@ public class Headbob : MonoBehaviour
     public float bobbingAmount = 0.2f;
     public float midpoint = 2.0f;
 
-    public void Headbobbing(bool strafeInput)
+    public void Headbobbing(Vector3 vector)
     {
         float waveslice = 0.0f;
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
+        float horizontal = vector.x;
+        float vertical = vector.z;
 
         Vector3 cSharpConversion = transform.localPosition;
 
-        if (strafeInput)
-        {
-            vertical = 1.0f;
-        }
-
+        //if (strafeInput)
+        //{
+        //    vertical = 1.0f;
+        //}
 
         if (Mathf.Abs(vertical) == 0)
         {

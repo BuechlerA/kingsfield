@@ -33,12 +33,28 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Attack"",
+                    ""type"": ""Button"",
+                    ""id"": ""155f7513-df1e-4d43-bd2a-d889f7d9525b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""c3df0ddb-42bb-49d6-b34f-896718acc9a4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
                 {
                     ""name"": ""2D Vector"",
-                    ""id"": ""57331b7f-7727-4546-bb72-a52052faf172"",
+                    ""id"": ""ba9f425d-c124-4f80-8c4d-47675ae4219a"",
                     ""path"": ""2DVector"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -49,62 +65,117 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""up"",
-                    ""id"": ""1750f0f4-79e1-4da7-a914-0171c2a85063"",
-                    ""path"": ""<Keyboard>/w"",
+                    ""id"": ""91169fe0-3d4f-4144-8f76-2e0f9cca8e36"",
+                    ""path"": ""<Gamepad>/leftStick/up"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Classic"",
+                    ""groups"": ""ClassicGamepad"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""down"",
-                    ""id"": ""c0373485-0170-471e-87d3-62f509b19c93"",
-                    ""path"": ""<Keyboard>/s"",
+                    ""id"": ""0d532491-762f-41bc-a7e9-8071c804c007"",
+                    ""path"": ""<Gamepad>/leftStick/down"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Classic"",
+                    ""groups"": ""ClassicGamepad"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""left"",
-                    ""id"": ""23f5d1bb-9838-4ad3-ae88-e3949e2da49c"",
-                    ""path"": ""<Keyboard>/q"",
+                    ""id"": ""c76dac62-3438-445f-b8ab-a7f1701f9ef1"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Classic"",
+                    ""groups"": ""ClassicGamepad"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""right"",
-                    ""id"": ""68f83f71-dee4-4589-92e8-2eaa67e7be75"",
-                    ""path"": ""<Keyboard>/e"",
+                    ""id"": ""0d67162f-c89d-43df-a030-c01121f6aa47"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Classic"",
+                    ""groups"": ""ClassicGamepad"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""d37a47f3-9f47-424c-a909-757d876796db"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""8e1c8c34-d750-4799-b600-5874aaf19d2a"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""ModernPC"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""56b0fee9-e8f4-4737-af23-b368199000ed"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""ModernPC"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""8cef02e6-c165-43ee-b1a1-d1ca950dfe5d"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""ModernPC"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""6c71cbfa-ff9c-4e41-a3f0-74fdbbc3c355"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""ModernPC"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
                     ""name"": """",
-                    ""id"": ""b2043bc2-5b5c-4a06-8751-3572a4f79cb5"",
+                    ""id"": ""f401e693-d02f-42a8-8613-b8a7dbdb7a0d"",
                     ""path"": ""<Mouse>/delta"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Modern"",
+                    ""groups"": ""ModernPC"",
                     ""action"": ""View"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": ""2D Vector"",
-                    ""id"": ""c4f33538-1e08-4202-bd7c-2167f9316a23"",
+                    ""id"": ""d56b0fa0-cd7e-4f98-8161-f74d7e20ee78"",
                     ""path"": ""2DVector"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -115,61 +186,122 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""up"",
-                    ""id"": ""d97925d7-1d40-4035-9cfa-9c877842a281"",
-                    ""path"": ""<Keyboard>/u"",
+                    ""id"": ""22fe595b-1562-468f-8870-824ce7b47023"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Classic"",
+                    ""groups"": ""ClassicGamepad"",
                     ""action"": ""View"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""down"",
-                    ""id"": ""a5b57761-764a-4a16-8c02-8b0474a1afb4"",
-                    ""path"": ""<Keyboard>/j"",
+                    ""id"": ""19f44d78-f9ff-4604-b707-ffab193d7bb1"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Classic"",
+                    ""groups"": ""ClassicGamepad"",
                     ""action"": ""View"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""left"",
-                    ""id"": ""195c1c22-a205-4bf7-a922-b1a83695f420"",
-                    ""path"": ""<Keyboard>/a"",
+                    ""id"": ""ceef5639-2c67-46bb-ac24-32de23f1257f"",
+                    ""path"": ""<Gamepad>/leftStick/left"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Classic"",
+                    ""groups"": ""ClassicGamepad"",
                     ""action"": ""View"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""right"",
-                    ""id"": ""fe04aff0-f9b3-4de0-b0e7-702da4eb5bf4"",
-                    ""path"": ""<Keyboard>/d"",
+                    ""id"": ""f7cb0b96-333d-46f3-8d46-4868c9abee10"",
+                    ""path"": ""<Gamepad>/leftStick/right"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Classic"",
+                    ""groups"": ""ClassicGamepad"",
                     ""action"": ""View"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c5e933f0-2601-4557-8abb-ffe5b706b86e"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""ModernPC"",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""44a8edb7-3ab7-4cf9-b932-35a92922cedb"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""ClassicGamepad"",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ec1098db-41a3-4e81-99c2-25dcb9fe2507"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""ClassicGamepad"",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9c58c7c6-a80d-416e-8a8f-d689ae978352"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""ModernPC"",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
     ],
     ""controlSchemes"": [
         {
-            ""name"": ""Modern"",
-            ""bindingGroup"": ""Modern"",
-            ""devices"": []
+            ""name"": ""ModernPC"",
+            ""bindingGroup"": ""ModernPC"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Keyboard>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                },
+                {
+                    ""devicePath"": ""<Mouse>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
         },
         {
-            ""name"": ""Classic"",
-            ""bindingGroup"": ""Classic"",
-            ""devices"": []
+            ""name"": ""ClassicGamepad"",
+            ""bindingGroup"": ""ClassicGamepad"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Gamepad>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
         }
     ]
 }");
@@ -177,6 +309,8 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
         m_Gameplay_Movement = m_Gameplay.FindAction("Movement", throwIfNotFound: true);
         m_Gameplay_View = m_Gameplay.FindAction("View", throwIfNotFound: true);
+        m_Gameplay_Attack = m_Gameplay.FindAction("Attack", throwIfNotFound: true);
+        m_Gameplay_Interact = m_Gameplay.FindAction("Interact", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -228,12 +362,16 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
     private IGameplayActions m_GameplayActionsCallbackInterface;
     private readonly InputAction m_Gameplay_Movement;
     private readonly InputAction m_Gameplay_View;
+    private readonly InputAction m_Gameplay_Attack;
+    private readonly InputAction m_Gameplay_Interact;
     public struct GameplayActions
     {
         private @PlayerInputActions m_Wrapper;
         public GameplayActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_Gameplay_Movement;
         public InputAction @View => m_Wrapper.m_Gameplay_View;
+        public InputAction @Attack => m_Wrapper.m_Gameplay_Attack;
+        public InputAction @Interact => m_Wrapper.m_Gameplay_Interact;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -249,6 +387,12 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 @View.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnView;
                 @View.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnView;
                 @View.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnView;
+                @Attack.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAttack;
+                @Attack.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAttack;
+                @Attack.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAttack;
+                @Interact.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInteract;
+                @Interact.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInteract;
+                @Interact.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInteract;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -259,31 +403,39 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 @View.started += instance.OnView;
                 @View.performed += instance.OnView;
                 @View.canceled += instance.OnView;
+                @Attack.started += instance.OnAttack;
+                @Attack.performed += instance.OnAttack;
+                @Attack.canceled += instance.OnAttack;
+                @Interact.started += instance.OnInteract;
+                @Interact.performed += instance.OnInteract;
+                @Interact.canceled += instance.OnInteract;
             }
         }
     }
     public GameplayActions @Gameplay => new GameplayActions(this);
-    private int m_ModernSchemeIndex = -1;
-    public InputControlScheme ModernScheme
+    private int m_ModernPCSchemeIndex = -1;
+    public InputControlScheme ModernPCScheme
     {
         get
         {
-            if (m_ModernSchemeIndex == -1) m_ModernSchemeIndex = asset.FindControlSchemeIndex("Modern");
-            return asset.controlSchemes[m_ModernSchemeIndex];
+            if (m_ModernPCSchemeIndex == -1) m_ModernPCSchemeIndex = asset.FindControlSchemeIndex("ModernPC");
+            return asset.controlSchemes[m_ModernPCSchemeIndex];
         }
     }
-    private int m_ClassicSchemeIndex = -1;
-    public InputControlScheme ClassicScheme
+    private int m_ClassicGamepadSchemeIndex = -1;
+    public InputControlScheme ClassicGamepadScheme
     {
         get
         {
-            if (m_ClassicSchemeIndex == -1) m_ClassicSchemeIndex = asset.FindControlSchemeIndex("Classic");
-            return asset.controlSchemes[m_ClassicSchemeIndex];
+            if (m_ClassicGamepadSchemeIndex == -1) m_ClassicGamepadSchemeIndex = asset.FindControlSchemeIndex("ClassicGamepad");
+            return asset.controlSchemes[m_ClassicGamepadSchemeIndex];
         }
     }
     public interface IGameplayActions
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnView(InputAction.CallbackContext context);
+        void OnAttack(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
 }

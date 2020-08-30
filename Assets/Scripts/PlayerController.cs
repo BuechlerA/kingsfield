@@ -74,11 +74,13 @@ public class PlayerController : MonoBehaviour
     {
         moveVector = new Vector3(moveInput.x, 0, moveInput.y);
         charController.Move(transform.TransformDirection(moveVector.normalized) * charSpeed * Time.deltaTime);
+        viewCam.GetComponent<Headbob>().Headbobbing(moveVector);
     }
 
     public void Look()
     {
-        transform.localEulerAngles += new Vector3(-viewInput.y, viewInput.x, 0f) * turnSpeed * Time.deltaTime;
+        transform.localEulerAngles += new Vector3(0f, viewInput.x, 0f) * turnSpeed * Time.deltaTime;
+        viewCam.transform.localEulerAngles += new Vector3(Mathf.Clamp(-viewInput.y, -80, 80), 0f, 0f) * turnSpeed * Time.deltaTime;
     }
 
     //public void GetInput(Vector3 moveVector, Vector3 viewVector, bool leftStep, bool rightStep, bool viewReset)
