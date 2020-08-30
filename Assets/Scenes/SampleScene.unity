@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 170076734}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -917,16 +917,35 @@ MonoBehaviour:
   m_GameObject: {fileID: 966157742}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
+  m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
-  m_SubmitButton: Submit
-  m_CancelButton: Cancel
-  m_InputActionsPerSecond: 10
-  m_RepeatDelay: 0.5
-  m_ForceModuleActive: 0
+  m_MoveRepeatDelay: 0.5
+  m_MoveRepeatRate: 0.1
+  m_ActionsAsset: {fileID: -944628639613478452, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_PointAction: {fileID: 1054132383583890850, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_MoveAction: {fileID: 3710738434707379630, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_SubmitAction: {fileID: 2064916234097673511, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_CancelAction: {fileID: -1967631576421560919, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_LeftClickAction: {fileID: 8056856818456041789, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_MiddleClickAction: {fileID: 3279352641294131588, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_RightClickAction: {fileID: 3837173908680883260, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_ScrollWheelAction: {fileID: 4502412055082496612, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_TrackedDevicePositionAction: {fileID: 4754684134866288074, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_TrackedDeviceOrientationAction: {fileID: 1025543830046995696, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_DeselectOnBackgroundClick: 1
+  m_PointerBehavior: 0
 --- !u!114 &966157744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -965,7 +984,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1173029003}
-  - component: {fileID: 1173029004}
   m_Layer: 5
   m_Name: HUDPanel
   m_TagString: Untagged
@@ -995,21 +1013,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0.000039125, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1173029004
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1173029002}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b01bf6ec4ef7b14a88aa626ce053825, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthFill: {fileID: 2121903953}
-  updateTimeSeconds: 0.2
-  player: {fileID: 1333020506}
 --- !u!1 &1222729124
 GameObject:
   m_ObjectHideFlags: 0
@@ -1137,18 +1140,56 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents:
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1333020509}
+        m_MethodName: Move
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 2aae5433-e62f-4ea6-9fce-b1d34264e487
     m_ActionName: Gameplay/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1333020509}
+        m_MethodName: Look
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: f6f5def2-770f-4a66-b268-c3f4c7143187
     m_ActionName: Gameplay/Look[/Mouse/delta]
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 232d9ca3-03c2-444f-a3c7-e395c872abf6
+    m_ActionName: Gameplay/Strafe[/Keyboard/q,/Keyboard/e]
+  m_NeverAutoSwitchControlSchemes: 1
+  m_DefaultControlScheme: Classic
   m_DefaultActionMap: Gameplay
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &1333020509 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9209229118381752893, guid: 3d34b21a4b2514b45ba0f8f5ead8f8f3,
+    type: 3}
+  m_PrefabInstance: {fileID: 9209229119703762278}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1333020506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6a98bad49310ce46bd123da96123da2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1347985194
 GameObject:
   m_ObjectHideFlags: 0
@@ -1765,6 +1806,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9209229118381752890, guid: 3d34b21a4b2514b45ba0f8f5ead8f8f3,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9209229118381752892, guid: 3d34b21a4b2514b45ba0f8f5ead8f8f3,
         type: 3}
       propertyPath: m_Name
@@ -1780,6 +1826,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9209229119198211880, guid: 3d34b21a4b2514b45ba0f8f5ead8f8f3,
+        type: 3}
+      propertyPath: m_Name
+      value: ViewCamera
+      objectReference: {fileID: 0}
     - target: {fileID: 9209229119198211894, guid: 3d34b21a4b2514b45ba0f8f5ead8f8f3,
         type: 3}
       propertyPath: m_ClearFlags
@@ -1790,5 +1841,7 @@ PrefabInstance:
       propertyPath: m_Animations.Array.data[0]
       value: 
       objectReference: {fileID: 7400000, guid: c71842b7286738e449911a976cac49e6, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9209229118381752837, guid: 3d34b21a4b2514b45ba0f8f5ead8f8f3, type: 3}
+    - {fileID: 9209229118381752890, guid: 3d34b21a4b2514b45ba0f8f5ead8f8f3, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 3d34b21a4b2514b45ba0f8f5ead8f8f3, type: 3}
