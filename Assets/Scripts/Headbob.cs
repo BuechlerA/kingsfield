@@ -10,20 +10,16 @@ public class Headbob : MonoBehaviour
     public float bobbingAmount = 0.2f;
     public float midpoint = 2.0f;
 
-    public void Headbobbing(Vector3 vector)
+    public void Headbobbing(float vectorH, float vectorV, bool sprintVal)
     {
         float waveslice = 0.0f;
-        float horizontal = vector.x;
-        float vertical = vector.z;
+        float horizontal = vectorH;
+        float vertical = vectorV;
+        float magnitude = new Vector2(vectorH, vectorV).magnitude;
 
         Vector3 cSharpConversion = transform.localPosition;
 
-        //if (strafeInput)
-        //{
-        //    vertical = 1.0f;
-        //}
-
-        if (Mathf.Abs(vertical) == 0)
+        if (Mathf.Abs(magnitude) == 0)
         {
             timer = 0.0f;
         }
@@ -39,14 +35,14 @@ public class Headbob : MonoBehaviour
         if (waveslice != 0)
         {
             float translateChange = waveslice * bobbingAmount;
-            float totalAxes = Mathf.Abs(vertical);
+            float totalAxes = Mathf.Abs(magnitude);
             totalAxes = Mathf.Clamp(totalAxes, 0.0f, 1.0f);
             translateChange = totalAxes * translateChange;
             cSharpConversion.y = midpoint + translateChange;
         }
         else
         {
-            cSharpConversion.y = midpoint;
+            cSharpConversion.y = Mathf.Lerp(transform.localPosition.y, midpoint, 0.5f);
         }
 
         transform.localPosition = cSharpConversion;

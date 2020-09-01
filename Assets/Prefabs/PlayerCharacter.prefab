@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 7303759899359110113}
   - component: {fileID: 4644581650355097107}
   - component: {fileID: 2538301008120721724}
-  - component: {fileID: 7272258951381093476}
   - component: {fileID: 1889034171105961018}
   - component: {fileID: -6691064361850065481}
   m_Layer: 0
@@ -111,116 +110,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6a98bad49310ce46bd123da96123da2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  viewCam: {fileID: 0}
-  weapon: {fileID: 0}
-  isAttacking: 0
-  isRunning: 0
-  charSpeed: 1
-  turnSpeed: 10
+  turnSpeed: 100
   walkSpeed: 1
-  runSpeed: 1.5
-  UICanvas: {fileID: 0}
-  audioSource: {fileID: 0}
-  stepSounds:
-  - {fileID: 0}
-  - {fileID: 0}
-  swingSound: {fileID: 0}
---- !u!82 &7272258951381093476
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4854146561331600043}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
+  runSpeed: 2
+  isPressingSprint: 0
+  isSprinting: 0
+  isCamFOV: 0
 --- !u!114 &1889034171105961018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,18 +143,7 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents:
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: 2aae5433-e62f-4ea6-9fce-b1d34264e487
     m_ActionName: Gameplay/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/q,/Keyboard/e]
   - m_PersistentCalls:
@@ -270,6 +154,40 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 155f7513-df1e-4d43-bd2a-d889f7d9525b
     m_ActionName: Gameplay/Attack
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2538301008120721724}
+        m_MethodName: Interact
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: c3df0ddb-42bb-49d6-b34f-896718acc9a4
+    m_ActionName: Gameplay/Interact[/XInputControllerWindows/buttonSouth,/Keyboard/f]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 112b902e-efc6-494e-9973-7cdbc51bcfa2
+    m_ActionName: Gameplay/Pause[/XInputControllerWindows/start,/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2538301008120721724}
+        m_MethodName: Sprint
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 0fd5f45d-c4c9-457b-beb1-28ff5aeb5558
+    m_ActionName: Gameplay/Sprint[/Keyboard/shift]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: ClassicGamepad
   m_DefaultActionMap: Gameplay
@@ -389,6 +307,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abefbcf42109fe64eb1720beb0db8c20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bobbingSpeed: 0.07
-  bobbingAmount: 0.03
+  bobbingSpeed: 0.08
+  bobbingAmount: 0.04
   midpoint: 0.51

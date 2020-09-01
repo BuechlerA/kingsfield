@@ -9,47 +9,40 @@ public class PlayerController : MonoBehaviour
 {
     private PlayerInputActions actions;
     private CharacterController charController;
-    [SerializeField] private Camera viewCam;
-
-    public GameObject weapon;
-
-    [SerializeField]
-    private bool isAttacking;
-    public bool isRunning;
+    private Camera viewCam;
 
     Vector2 moveInput;
     Vector2 viewInput;
 
     Vector3 moveVector;
 
-    float strafeInput;
-
-    public float charSpeed = 1f;
     public float turnSpeed = 100f;
 
     public float walkSpeed = 1f;
-    public float runSpeed = 1.5f;
+    public float runSpeed = 5f;
 
-    float attackTimer = 0f;
+    float GRAVITY = -8f;
+
+    float xRotation = 0f;
+    float yRotation = 0f;
 
     [SerializeField]
-    private Canvas UICanvas;
-
-    //Sounds
-    public AudioSource audioSource;
-    public AudioClip[] stepSounds = new AudioClip[2];
-    public AudioClip swingSound;
+    bool isPressingSprint;
+    [SerializeField]
+    bool isSprinting;
+    [SerializeField]
+    bool isCamFOV;
 
     private void Awake()
     {
         charController = GetComponent<CharacterController>();
         viewCam = GameObject.Find("ViewCamera").GetComponent<Camera>();
 
-        //Sounds
-        audioSource = GetComponent<AudioSource>();
-
         //InputActions
         actions = new PlayerInputActions();
+        actions.bindingMask = new InputBinding { groups = "ModernPC" };
+
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void Update()
@@ -72,86 +65,69 @@ public class PlayerController : MonoBehaviour
     //New Input System
     public void Move()
     {
-        moveVector = new Vector3(moveInput.x, 0, moveInput.y);
-        charController.Move(transform.TransformDirection(moveVector.normalized) * charSpeed * Time.deltaTime);
-        viewCam.GetComponent<Headbob>().Headbobbing(moveVector);
+        if (isPressingSprint && moveInput.y == 1f && moveInput.x == 0f)
+        {
+            isSprinting = true;
+            charController.Move(transform.TransformDirection(moveInput.x, GRAVITY, moveInput.y) * Time.deltaTime * runSpeed);
+            if (viewCam.fieldOfView <= 61f && !isCamFOV)
+            {
+                StartCoroutine(CamSprintFOV(60f, 70f));
+            }
+        }
+        else
+        {
+            isSprinting = false;
+            charController.Move(transform.TransformDirection(moveInput.x, GRAVITY, moveInput.y) * Time.deltaTime * walkSpeed);
+            if (viewCam.fieldOfView >= 61f && !isCamFOV)
+            {
+                StartCoroutine(CamSprintFOV(70f, 60f));
+            }
+        }
+        viewCam.GetComponent<Headbob>().Headbobbing(moveInput.x, moveInput.y, isSprinting);
     }
 
     public void Look()
     {
-        transform.localEulerAngles += new Vector3(0f, viewInput.x, 0f) * turnSpeed * Time.deltaTime;
-        viewCam.transform.localEulerAngles += new Vector3(Mathf.Clamp(-viewInput.y, -80, 80), 0f, 0f) * turnSpeed * Time.deltaTime;
+        xRotation -= viewInput.y * Time.deltaTime;
+        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+
+        yRotation += viewInput.x * Time.deltaTime;
+
+        viewCam.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+        transform.localRotation = Quaternion.Euler(0f, yRotation, 0f);
     }
 
-    //public void GetInput(Vector3 moveVector, Vector3 viewVector, bool leftStep, bool rightStep, bool viewReset)
-    //{
-    //    movePlayer = moveVector;
-    //    viewPlayer += viewVector;
-    //    viewPlayer.x = Mathf.Clamp(viewPlayer.x, -60, 60);
+    public void Sprint(InputAction.CallbackContext context)
+    {
+        if (context.ReadValueAsButton())
+        {
+            isPressingSprint = true;      
+        }
+        else
+        {
+            isPressingSprint = false;        
+        }
+    }
 
-    //    if (leftStep && !rightStep)
-    //    {
-    //        strafeInput = -1;
-    //    }
-    //    else if (!leftStep && rightStep)
-    //    {
-    //        strafeInput = 1;
-    //    }
-    //    else
-    //    {
-    //        strafeInput = 0;
-    //    }
+    public void Interact(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+        {
+            RaycastHit hit;
+            Ray ray = viewCam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+            Debug.DrawRay(ray.origin, ray.direction * 2f, Color.green, 2f);
 
-    //    Movement();
-    //    View(viewReset);
-    //}
+            if (Physics.Raycast(ray, out hit, 2f))
+            {
+                Debug.Log(hit.collider.gameObject.name);
 
-    //public void Movement()
-    //{
-
-    //    if (isRunning)
-    //    {
-    //        charSpeed = runSpeed;
-    //    }
-    //    else
-    //    {
-    //        charSpeed = walkSpeed;
-    //    }
-
-    //    charController.Move(transform.TransformDirection(strafeInput, 0, movePlayer.z)* charSpeed * Time.deltaTime);
-
-
-    //    if (Mathf.Abs(movePlayer.z) >= 0.5f || strafeInput != 0)
-    //    {
-    //        //Sounds
-    //        int i = 0;
-    //        if (audioSource.isPlaying)
-    //        {
-    //            return;
-    //        }
-    //        else if (!audioSource.isPlaying)
-    //        {
-    //            audioSource.PlayOneShot(stepSounds[i]);
-    //            i++;
-    //            if (i > 1)
-    //            {
-    //                i = 0;
-    //            }
-    //        }
-    //    }
-    //}
-
-    //public void View(bool resetValue)
-    //{
-    //        transform.localEulerAngles += new Vector3(0, movePlayer.x, 0) * turnSpeed;
-
-    //    Camera.main.transform.localEulerAngles = new Vector3(Mathf.Clamp(viewPlayer.x, -60, 60), 0, 0);
-
-    //    if (resetValue)
-    //    {
-    //        Camera.main.transform.localEulerAngles += new Vector3(Mathf.LerpAngle(transform.localEulerAngles.x, 0.0f, Time.deltaTime * 1.5f), 0 , 0);
-    //    }
-    //}
+                if (hit.collider.GetComponent<InteractableBehaviour>())
+                {
+                    Debug.Log(hit.collider.GetComponent<InteractableBehaviour>().dialogueText);
+                }
+            }
+        }
+    }
 
     //public void Attack(Vector2 attackVector)
     //{
@@ -174,37 +150,19 @@ public class PlayerController : MonoBehaviour
     //    }
     //}
 
-    //public void Interact()
-    //{
-    //    RaycastHit hit;
-    //    Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-    //    Debug.DrawRay(ray.origin, ray.direction * 2f, Color.green, 2f);
+    IEnumerator CamSprintFOV(float startValue, float endValue)
+    {
+        isCamFOV = true;
+        float timeElapsed = 0f;
 
-    //    if (Physics.Raycast(ray, out hit, 2f))
-    //    {
-    //        Debug.Log(hit.collider.gameObject.name);
+        while (timeElapsed < 0.5f)
+        {
+            viewCam.fieldOfView = Mathf.Lerp(startValue, endValue, timeElapsed / 0.5f);
+            timeElapsed += Time.deltaTime;
 
-    //        if (hit.collider.GetComponent<InteractableBehaviour>() && GetComponent<InputController>().inputEnabled)
-    //        {
-    //            string myText = hit.collider.GetComponent<InteractableBehaviour>().dialogueText;
-
-    //            GetComponent<InputController>().inputEnabled = false;
-    //            UICanvas.GetComponentInChildren<Text>().text = myText;
-    //            UICanvas.GetComponent<UIBehaviour>().FadeIn();
-    //        }
-    //        else if (hit.collider.GetComponent<InteractableBehaviour>() && !GetComponent<InputController>().inputEnabled)
-    //        {
-    //            GetComponent<InputController>().inputEnabled = true;
-    //            UICanvas.GetComponent<UIBehaviour>().FadeOut();
-    //        }
-    //        else
-    //        {
-    //            return;
-    //        }
-
-    //    }
-    //}
-
-
+            yield return null;
+        }
+        isCamFOV = false;
+    }
 }
 
