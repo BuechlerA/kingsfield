@@ -52,8 +52,11 @@ public class PlayerController : MonoBehaviour
         moveInput = actions.Gameplay.Movement.ReadValue<Vector2>();
         viewInput = actions.Gameplay.View.ReadValue<Vector2>();
 
-        Move();
-        Look();
+        if (!playerStatus.isDead)
+        {
+            Move();
+            Look();
+        }
     }
     private void OnEnable()
     {

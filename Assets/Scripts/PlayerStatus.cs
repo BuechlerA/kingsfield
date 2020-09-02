@@ -41,7 +41,7 @@ public class PlayerStatus : MonoBehaviour, IDamageable
                 StopCoroutine(coroutine);
                 isRegenerating = false;
             }
-            currentStamina -= usageRate * Time.deltaTime;
+            UseStamina();
         }
         if (!isUsingStamina && !isRegenerating)
         {
@@ -52,16 +52,11 @@ public class PlayerStatus : MonoBehaviour, IDamageable
         }
     }
 
-    public void UseStamina(InputAction.CallbackContext context)
+    public void UseStamina()
     {
-        if(context.ReadValueAsButton())
-        {
-            //isUsingStamina = true;
-        }
-        else
-        {
-            //isUsingStamina = false;
-        }
+        currentStamina -= usageRate * Time.deltaTime;
+        float currentStaminaPct = currentStamina / maxStamina;
+        OnStaminaChanged(currentStaminaPct);
     }
 
     public void TakeDamage(float damageAmount)
@@ -76,12 +71,17 @@ public class PlayerStatus : MonoBehaviour, IDamageable
         {
             Die();
         }
+        else
+        {
+            return;
+        }
     }
 
     [ContextMenu("Die")]
     public void Die()
     {
         isDead = true;
+        Debug.Log("YOU DIED");
     }
 
     public static float EaseIn(float t)
@@ -111,6 +111,8 @@ public class PlayerStatus : MonoBehaviour, IDamageable
         {
             currentStamina = Mathf.Lerp(currentStamina, maxStamina, timeElapsed / rate);
             timeElapsed += Time.deltaTime;
+            float currentStaminaPct = currentStamina / maxStamina;
+            OnStaminaChanged(currentStaminaPct);
             yield return null;
         }
         isRegenerating = false;
