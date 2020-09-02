@@ -1,18 +1,47 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    EnemyStates currentState;
+
+    private void Start()
+    {
+        currentState = EnemyStates.Idle;
+    }
+
+    private void LateUpdate()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Idle()
+    {
+
+    }
+
+    private void Roam()
     {
         
+    }
+
+    private void Chase()
+    {
+
+    }
+
+    private void Attack()
+    {
+
+    }
+
+    enum EnemyStates
+    {
+        Idle,
+        Roam,
+        Chase,
+        Attack
     }
 }

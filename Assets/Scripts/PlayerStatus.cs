@@ -3,26 +3,28 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
+using System.Text.RegularExpressions;
 
-public class PlayerStatus : MonoBehaviour
+public class PlayerStatus : MonoBehaviour, IDamageable
 {
-
     public float maxHealth = 10f;
     public float currentHealth;
 
     public float maxStamina = 10f;
     public float currentStamina;
+    public float usageRate = 2f;
+    public float regenRate = 10f;
 
     public event Action<float> OnHealthChanged = delegate { };
     public event Action<float> OnStaminaChanged = delegate { };
 
-    bool isDead;
-    bool hasStarted;
+    public bool isDead;
+    public bool isUsingStamina;
+    [SerializeField]
+    bool isRegenerating;
 
-    void OnEnable()
-    {
-        currentHealth = maxHealth;
-    }
+    private Coroutine coroutine;
 
     private void Start()
     {
@@ -30,69 +32,57 @@ public class PlayerStatus : MonoBehaviour
         currentStamina = maxStamina;
     }
 
-    private IEnumerator RegenerateStamina()
+    private void LateUpdate()
     {
-        yield return null;
+        if (isUsingStamina && currentStamina >= 0)
+        {
+            if (isRegenerating)
+            {
+                StopCoroutine(coroutine);
+                isRegenerating = false;
+            }
+            currentStamina -= usageRate * Time.deltaTime;
+        }
+        if (!isUsingStamina && !isRegenerating)
+        {
+            if (currentStamina < maxStamina)
+            {
+                coroutine = StartCoroutine(RegenerateStamina(regenRate));
+            }
+        }
     }
 
-    public void UseStamina()
+    public void UseStamina(InputAction.CallbackContext context)
     {
-
+        if(context.ReadValueAsButton())
+        {
+            //isUsingStamina = true;
+        }
+        else
+        {
+            //isUsingStamina = false;
+        }
     }
 
-    //public void TakeDamage(float damageAmount)
-    //{
-    //    if (!isDead)
-    //    {
-    //        currentHealth -= damageAmount;
-    //        float currentHealthPct = currentHealth / maxHealth;
-    //        OnHealthPctChanged(currentHealthPct);
-    //        StartCoroutine(DamageFlash(0.7f, 0.4f));
-    //    }
+    public void TakeDamage(float damageAmount)
+    {
+        if (!isDead)
+        {
+            currentHealth -= damageAmount;
+            float currentHealthPct = currentHealth / maxHealth;
+            OnHealthChanged(currentHealthPct);
+        }
+        if (currentHealth <= 0 && !isDead)
+        {
+            Die();
+        }
+    }
 
-    //    if (currentHealth >= 1)
-    //    {
-    //        GetComponent<AudioSource>().PlayOneShot(hurtSound);
-    //    }
-
-    //    if (currentHealth <= 0 && !isDead)
-    //    {
-    //        Die();
-    //    }
-    //}
-
-    //[ContextMenu("Die")]
-    //private void Die()
-    //{
-    //    isDead = true;
-    //    animator.enabled = true;
-    //    animator.SetBool("isDead", true);
-    //    GetComponent<InputController>().inputEnabled = false;
-    //    GetComponent<AudioSource>().PlayOneShot(deathSound);
-    //}
-
-    //private IEnumerator DamageFlash(float targetValue, float flashDuration)
-    //{
-    //    if (hasStarted)
-    //    {
-    //        yield return null;
-    //    }
-    //    else
-    //    {
-    //        hasStarted = true;
-    //        float elapsedTime = 0f;
-    //        float startValue = damageEffectPanel.alpha;
-
-    //        while (elapsedTime <= flashDuration)
-    //        {
-    //            float currentValue = Mathf.Lerp(startValue, targetValue, Spike(elapsedTime / flashDuration));
-    //            damageEffectPanel.alpha = currentValue;
-    //            yield return null;
-    //            elapsedTime += Time.deltaTime;
-    //        }
-    //        hasStarted = false;
-    //    }
-    //}
+    [ContextMenu("Die")]
+    public void Die()
+    {
+        isDead = true;
+    }
 
     public static float EaseIn(float t)
     {
@@ -110,5 +100,19 @@ public class PlayerStatus : MonoBehaviour
             return EaseIn(t / .5f);
 
         return EaseIn(Flip(t) / .5f);
+    }
+
+    private IEnumerator RegenerateStamina(float rate)
+    {
+        isRegenerating = true;
+        yield return new WaitForSeconds(3);
+        float timeElapsed = 0f;
+        while (currentStamina < maxStamina)
+        {
+            currentStamina = Mathf.Lerp(currentStamina, maxStamina, timeElapsed / rate);
+            timeElapsed += Time.deltaTime;
+            yield return null;
+        }
+        isRegenerating = false;
     }
 }

@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     private PlayerInputActions actions;
     private CharacterController charController;
     private Camera viewCam;
+    private PlayerStatus playerStatus;
 
     Vector2 moveInput;
     Vector2 viewInput;
@@ -36,6 +37,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         charController = GetComponent<CharacterController>();
+        playerStatus = GetComponent<PlayerStatus>();
         viewCam = GameObject.Find("ViewCamera").GetComponent<Camera>();
 
         //InputActions
@@ -65,9 +67,10 @@ public class PlayerController : MonoBehaviour
     //New Input System
     public void Move()
     {
-        if (isPressingSprint && moveInput.y == 1f && moveInput.x == 0f)
+        if (isPressingSprint && moveInput.y == 1f && moveInput.x == 0f && playerStatus.currentStamina > 0f)
         {
             isSprinting = true;
+            playerStatus.isUsingStamina = true;
             charController.Move(transform.TransformDirection(moveInput.x, GRAVITY, moveInput.y) * Time.deltaTime * runSpeed);
             if (viewCam.fieldOfView <= 61f && !isCamFOV)
             {
@@ -77,6 +80,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             isSprinting = false;
+            playerStatus.isUsingStamina = false;
             charController.Move(transform.TransformDirection(moveInput.x, GRAVITY, moveInput.y) * Time.deltaTime * walkSpeed);
             if (viewCam.fieldOfView >= 61f && !isCamFOV)
             {
@@ -101,11 +105,11 @@ public class PlayerController : MonoBehaviour
     {
         if (context.ReadValueAsButton())
         {
-            isPressingSprint = true;      
+            isPressingSprint = true;
         }
         else
         {
-            isPressingSprint = false;        
+            isPressingSprint = false;
         }
     }
 
