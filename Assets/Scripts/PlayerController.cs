@@ -4,9 +4,12 @@ using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Animations;
+using System;
 
 public class PlayerController : MonoBehaviour
 {
+    public event Action<bool> OnMove = delegate { };
+
     private PlayerInputActions actions;
     private CharacterController charController;
     private Camera viewCam;
@@ -56,6 +59,18 @@ public class PlayerController : MonoBehaviour
         {
             Move();
             Look();
+
+            if (moveInput.magnitude > 0f)
+            {
+                if (isSprinting)
+                {
+                    OnMove(true);
+                }
+                else
+                {
+                    OnMove(false);
+                }
+            }
         }
     }
     private void OnEnable()

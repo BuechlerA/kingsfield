@@ -1,15 +1,20 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class StatusZoneBehaviour : MonoBehaviour
 {
-    public float changeAmount = 0f;
+    [SerializeField]
+    private ZoneTypes zoneType;
+    public float changeAmount;
+    public float changeRate;
     private Coroutine changeRoutine;
 
     private void OnTriggerEnter(Collider other)
     {
-        changeRoutine = StartCoroutine(Damager(changeAmount, other));
+        
+        changeRoutine = StartCoroutine(Changer(changeAmount, other));
     }
     
     private void OnTriggerExit()
@@ -17,16 +22,26 @@ public class StatusZoneBehaviour : MonoBehaviour
         StopCoroutine(changeRoutine);
     }
 
-    private IEnumerator Damager(float dmg, Collider collider)
+    private IEnumerator Changer(float val, Collider collider)
     {
-        float totalDamage = 0f;
         while (true)
         { 
-            yield return new WaitForSeconds(1.3f);
-            collider.GetComponent<PlayerStatus>().TakeDamage(dmg);
+            yield return new WaitForSeconds(changeRate);
+            if (zoneType == ZoneTypes.Damage)
+            {
+                collider.GetComponent<PlayerStatus>().TakeDamage(val);
+            }
+            if (zoneType == ZoneTypes.Heal)
+            {
+                collider.GetComponent<PlayerStatus>().Heal(val);
+            }
             yield return null;
-            totalDamage += dmg;
-            Debug.Log("total damage cause: " + totalDamage);
         }
+    }
+
+    enum ZoneTypes
+    {
+        Heal,
+        Damage
     }
 }

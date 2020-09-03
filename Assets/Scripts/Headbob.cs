@@ -42,7 +42,7 @@ public class Headbob : MonoBehaviour
         }
         else
         {
-            cSharpConversion.y = Mathf.Lerp(transform.localPosition.y, midpoint, 0.5f);
+            cSharpConversion.y = Mathf.Lerp(transform.localPosition.y, midpoint, 2f);
         }
 
         transform.localPosition = cSharpConversion;

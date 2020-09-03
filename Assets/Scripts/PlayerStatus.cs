@@ -6,20 +6,17 @@ using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using System.Text.RegularExpressions;
 
-public class PlayerStatus : MonoBehaviour, IDamageable
+public class PlayerStatus : EntityBehaviour, IDamageable
 {
-    public float maxHealth = 10f;
-    public float currentHealth;
+    public event Action<float> OnHealthChanged = delegate { };
+    public event Action<float> OnStaminaChanged = delegate { };
+    public event Action<float> OnDeath = delegate { };
 
     public float maxStamina = 10f;
     public float currentStamina;
     public float usageRate = 2f;
     public float regenRate = 10f;
 
-    public event Action<float> OnHealthChanged = delegate { };
-    public event Action<float> OnStaminaChanged = delegate { };
-
-    public bool isDead;
     public bool isUsingStamina;
     [SerializeField]
     bool isRegenerating;
@@ -59,7 +56,7 @@ public class PlayerStatus : MonoBehaviour, IDamageable
         OnStaminaChanged(currentStaminaPct);
     }
 
-    public void TakeDamage(float damageAmount)
+    public override void TakeDamage(float damageAmount)
     {
         if (!isDead)
         {
@@ -77,10 +74,18 @@ public class PlayerStatus : MonoBehaviour, IDamageable
         }
     }
 
+    public override void Heal(float healValue)
+    {
+        base.Heal(healValue);
+        float currentHealthPct = currentHealth / maxHealth;
+        OnHealthChanged(currentHealthPct);
+    }
+
     [ContextMenu("Die")]
-    public void Die()
+    public override void Die()
     {
         isDead = true;
+        OnDeath(0f);
         Debug.Log("YOU DIED");
     }
 
