@@ -146,6 +146,7 @@ public class PlayerController : MonoBehaviour
                 if (hit.collider.GetComponent<InteractableBehaviour>())
                 {
                     Debug.Log(hit.collider.GetComponent<InteractableBehaviour>().dialogueText);
+                    GameEvents.current.Interact(hit.collider.GetComponent<InteractableBehaviour>().dialogueText);
                 }
             }
         }

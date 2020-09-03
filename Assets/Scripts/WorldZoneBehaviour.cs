@@ -11,7 +11,7 @@ public class WorldZoneBehaviour : MonoBehaviour
     public AudioClip entrySound;
     private AudioSource audioSource;
 
-    public event Action<string, string> OnZoneEntry = delegate { };
+    //public event Action<string, string> OnZoneEntry = delegate { };
 
     private void Awake()
     {
@@ -22,11 +22,13 @@ public class WorldZoneBehaviour : MonoBehaviour
     {
         //OnZoneEntry(zoneName, subName);
         GameEvents.current.ZoneEntry(zoneName, subName);
+        audioSource.clip = entrySound;
 
-        if (!audioSource.isPlaying)
+        if (audioSource.isPlaying)
         {
-            audioSource.clip = entrySound;
-            audioSource.Play();
+            audioSource.Stop();       
         }
+        audioSource.Play();
+
     }
 }

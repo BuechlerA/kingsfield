@@ -17,4 +17,10 @@ public class GameEvents : MonoBehaviour
     {
         OnZoneEntry?.Invoke(name, sub);
     }
+
+    public event Action<string> OnInteract = delegate { };
+    public void Interact(string dialogue)
+    {
+        OnInteract?.Invoke(dialogue);
+    }
 }

@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class WorldZonePanelBehaviour : MonoBehaviour
+public class DialoguePanelBehaviour : MonoBehaviour
 {
-    public Text zoneNameText;
-    public Text subNameText;
+    public Text interactionText;
 
     public CanvasGroup canvasGroup;
 
@@ -21,13 +20,12 @@ public class WorldZonePanelBehaviour : MonoBehaviour
 
     private void Start()
     {
-        GameEvents.current.OnZoneEntry += CurrentZoneEntry;
+        GameEvents.current.OnInteract += Current_OnInteract;
     }
 
-    private void CurrentZoneEntry(string arg1, string arg2)
+    private void Current_OnInteract(string arg1)
     {
-        zoneNameText.text = arg1;
-        subNameText.text = arg2;
+        interactionText.text = arg1;
 
         fadeRoutine = StartCoroutine(FadeText());
     }
@@ -36,7 +34,7 @@ public class WorldZonePanelBehaviour : MonoBehaviour
     {
         float startAlpha = 0f;
         float endAlpha = 1f;
-        
+
         float timeDuration = 3f;
         float startTime = Time.time;
         float endTime = Time.time + timeDuration;
@@ -82,4 +80,5 @@ public class WorldZonePanelBehaviour : MonoBehaviour
             isRunningFade = false;
         }
     }
+
 }

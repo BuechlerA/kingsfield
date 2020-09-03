@@ -8,13 +8,13 @@ public class PlayerSound : MonoBehaviour
     public AudioClip walkSound;
     public AudioClip hurtSound;
     public AudioClip deathSound;
-    public AudioSource soundSource;
+    public AudioSource walkSoundSource;
+    public AudioSource hurtSoundSource;
 
     private GameObject player;
 
     public void Awake()
     {
-        soundSource = GetComponent<AudioSource>();
         player = GameObject.Find("PlayerCharacter");
         player.GetComponent<PlayerController>().OnMove += PlayWalkSound;
         player.GetComponent<PlayerStatus>().OnHealthChanged += PlayHurtSound;
@@ -25,34 +25,35 @@ public class PlayerSound : MonoBehaviour
 
     public void PlayWalkSound(bool sprintState)
     {
-        soundSource.clip = walkSound;
-        if (!soundSource.isPlaying)
+        walkSoundSource.clip = walkSound;
+        if (!walkSoundSource.isPlaying)
         {
             if (sprintState)
             {
-                soundSource.pitch = 1.2f;
-                soundSource.Play();
+                walkSoundSource.pitch = 1.1f;
+                walkSoundSource.Play();
                 
             }
             else
             {
-                soundSource.pitch = 1.0f;
-                soundSource.Play();
+                walkSoundSource.pitch = 1.0f;
+                walkSoundSource.Play();
             }
         }
     }
 
     public void PlayHurtSound(float value)
     {
-        if (!soundSource.isPlaying)
+        if (!hurtSoundSource.isPlaying)
         {
-            soundSource.PlayOneShot(hurtSound);
+            hurtSoundSource.PlayOneShot(hurtSound);
         }
     }
 
     private void PlayDeathSound(float value)
     {
-        soundSource.PlayOneShot(deathSound);
+        hurtSoundSource.Stop();
+        hurtSoundSource.PlayOneShot(deathSound);
     }
 
 }
