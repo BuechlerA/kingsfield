@@ -13,7 +13,6 @@ public class StatusZoneBehaviour : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        
         changeRoutine = StartCoroutine(Changer(changeAmount, other));
     }
     
@@ -29,11 +28,11 @@ public class StatusZoneBehaviour : MonoBehaviour
             yield return new WaitForSeconds(changeRate);
             if (zoneType == ZoneTypes.Damage)
             {
-                collider.GetComponent<PlayerStatus>().TakeDamage(val);
+                collider.GetComponent<EntityBehaviour>().TakeDamage(val);
             }
             if (zoneType == ZoneTypes.Heal)
             {
-                collider.GetComponent<PlayerStatus>().Heal(val);
+                collider.GetComponent<EntityBehaviour>().Heal(val);
             }
             yield return null;
         }
