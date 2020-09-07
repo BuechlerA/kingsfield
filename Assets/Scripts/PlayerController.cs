@@ -152,26 +152,25 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    //public void Attack(Vector2 attackVector)
-    //{
-    //    if (!isAttacking)
-    //    {
-    //        isAttacking = true;
+    public void Attack(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+        {
+            if (playerStatus.currentStamina <= 0f) return;
+            playerStatus.UseAttack();
 
-    //        if (attackVector.x >= -0.5f)
-    //        {
-    //            Debug.Log("left swing!");
-    //        }
-    //        if (attackVector.x >= 0.5f)
-    //        {
-    //            Debug.Log("right swing!");
-    //        }
-
-    //        audioSource.PlayOneShot(swingSound);
-
-    //        isAttacking = false;
-    //    }
-    //}
+            Debug.Log("player attacking");
+            RaycastHit hit;
+            Ray ray = viewCam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+            if (Physics.Raycast(ray, out hit, 2f))
+            {
+                if (hit.collider.gameObject.GetComponent<EntityBehaviour>() != null)
+                {
+                    hit.collider.gameObject.GetComponent<EntityBehaviour>().TakeDamage(2f);
+                }
+            }
+        }
+    }
 
     IEnumerator CamSprintFOV(float startValue, float endValue)
     {

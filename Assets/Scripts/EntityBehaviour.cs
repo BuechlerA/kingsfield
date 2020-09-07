@@ -9,11 +9,21 @@ public class EntityBehaviour : MonoBehaviour, IDamageable
 
     public bool isDead;
 
+    public virtual void Start()
+    {
+        currentHealth = maxHealth;
+    }
+
     public virtual void TakeDamage(float damageValue)
     {
         if (currentHealth >= 0f)
         {
             currentHealth -= damageValue;
+            if (currentHealth <= 0f)
+            {
+                currentHealth = 0f;
+                Die();
+            }
         }
     }
 

@@ -55,6 +55,16 @@ public class PlayerStatus : EntityBehaviour, IDamageable
         float currentStaminaPct = currentStamina / maxStamina;
         OnStaminaChanged(currentStaminaPct);
     }
+    public void UseAttack()
+    {
+        if (isRegenerating)
+        {
+            StopCoroutine(coroutine);
+        }
+        currentStamina -= usageRate;
+        float currentStaminaPct = currentStamina / maxStamina;
+        OnStaminaChanged(currentStaminaPct);
+    }
 
     public override void TakeDamage(float damageAmount)
     {

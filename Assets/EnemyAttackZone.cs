@@ -4,8 +4,5 @@ using UnityEngine;
 
 public class EnemyAttackZone : MonoBehaviour
 {
-    public void OnTriggerStay(Collider other)
-    {
 
-    }
 }

@@ -428,7 +428,18 @@ MonoBehaviour:
     m_ActionId: f6f5def2-770f-4a66-b268-c3f4c7143187
     m_ActionName: Gameplay/View[/Mouse/delta,/Keyboard/u,/Keyboard/j,/Keyboard/a,/Keyboard/d]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2538301008120721724}
+        m_MethodName: Attack
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 155f7513-df1e-4d43-bd2a-d889f7d9525b
     m_ActionName: Gameplay/Attack
   - m_PersistentCalls:

@@ -10,6 +10,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField]
     private EnemyStates currentState;
     private NavMeshAgent agent;
+    private EnemyStatus status;
     private GameObject player;
     public LayerMask layerMask;
     public EnemyAttackZone attackZone;
@@ -25,10 +26,12 @@ public class EnemyController : MonoBehaviour
     private bool walkpointSet;
     [SerializeField]
     private Vector3 walkpoint;
+    private bool isAttacking;
 
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+        status = GetComponent<EnemyStatus>();
     }
 
     private void Start()
@@ -39,6 +42,8 @@ public class EnemyController : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (status.isDead) return;
+
         inAggroRange = Physics.CheckSphere(transform.position, aggroRange, layerMask);
         inAttackRange = Physics.CheckSphere(transform.position, attackRange, layerMask);
 
@@ -53,6 +58,11 @@ public class EnemyController : MonoBehaviour
         if (inAggroRange && inAttackRange)
         {
             Attack();
+        }
+
+        if (agent.velocity.magnitude > 0f)
+        {
+            transform.rotation = Quaternion.LookRotation(agent.velocity.normalized * Time.deltaTime * 0.1f);
         }
     }
 
@@ -94,7 +104,18 @@ public class EnemyController : MonoBehaviour
     private void Attack()
     {
         currentState = EnemyStates.Attack;
-        
+        if (!isAttacking)
+        {
+            isAttacking = true;
+            StartCoroutine(AttackRoutine());
+        }
+    }
+
+    private void Flee()
+    {
+        walkpointSet = false;
+        currentState = EnemyStates.Flee;
+        agent.SetDestination(player.transform.position + transform.position);
     }
 
     enum EnemyStates
@@ -102,8 +123,17 @@ public class EnemyController : MonoBehaviour
         Idle,
         Roam,
         Chase,
-        Attack
+        Attack,
+        Flee
     }
 
-
+    private IEnumerator AttackRoutine()
+    {
+        agent.isStopped = true;
+        Debug.Log("enemy is attacking");
+        yield return new WaitForSeconds(1.5f);
+        isAttacking = false;
+        agent.isStopped = false;
+        yield return null;
+    }
 }
