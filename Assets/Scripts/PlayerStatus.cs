@@ -57,10 +57,6 @@ public class PlayerStatus : EntityBehaviour, IDamageable
     }
     public void UseAttack()
     {
-        if (isRegenerating)
-        {
-            StopCoroutine(coroutine);
-        }
         currentStamina -= usageRate;
         float currentStaminaPct = currentStamina / maxStamina;
         OnStaminaChanged(currentStaminaPct);

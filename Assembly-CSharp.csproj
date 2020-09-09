@@ -71,6 +71,7 @@
     <Compile Include="Assets\Scripts\EntityBehaviour.cs" />
     <Compile Include="Assets\Scripts\GameEvents.cs" />
     <Compile Include="Assets\Scripts\HUDDamageBehaviour.cs" />
+    <Compile Include="Assets\Scripts\HUDStaminaDotsBehaviour.cs" />
     <Compile Include="Assets\Scripts\HUDStatusBehaviour.cs" />
     <Compile Include="Assets\Scripts\Headbob.cs" />
     <Compile Include="Assets\Scripts\IDamageable.cs" />
