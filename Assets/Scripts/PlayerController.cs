@@ -157,6 +157,7 @@ public class PlayerController : MonoBehaviour
         if (context.phase == InputActionPhase.Started)
         {
             if (playerStatus.currentStamina <= 0f) return;
+            playerStatus.isUsingStamina = true;
             playerStatus.UseAttack();
 
             Debug.Log("player attacking");
