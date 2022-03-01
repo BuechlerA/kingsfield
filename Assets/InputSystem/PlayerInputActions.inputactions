@@ -11,7 +11,8 @@
                     "id": "2aae5433-e62f-4ea6-9fce-b1d34264e487",
                     "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": true
                 },
                 {
                     "name": "View",
@@ -19,7 +20,8 @@
                     "id": "f6f5def2-770f-4a66-b268-c3f4c7143187",
                     "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Attack",
@@ -27,7 +29,8 @@
                     "id": "155f7513-df1e-4d43-bd2a-d889f7d9525b",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Interact",
@@ -35,7 +38,8 @@
                     "id": "c3df0ddb-42bb-49d6-b34f-896718acc9a4",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Pause",
@@ -43,7 +47,8 @@
                     "id": "112b902e-efc6-494e-9973-7cdbc51bcfa2",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Sprint",
@@ -51,7 +56,8 @@
                     "id": "0fd5f45d-c4c9-457b-beb1-28ff5aeb5558",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -225,7 +231,7 @@
                     "id": "f401e693-d02f-42a8-8613-b8a7dbdb7a0d",
                     "path": "<Mouse>/delta",
                     "interactions": "",
-                    "processors": "ScaleVector2(x=10,y=10)",
+                    "processors": "ScaleVector2(x=50,y=50)",
                     "groups": "ModernPC",
                     "action": "View",
                     "isComposite": false,
@@ -474,7 +480,8 @@
                     "id": "b18f7958-2061-4023-aa25-cdc6f16df9a6",
                     "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Submit",
@@ -482,7 +489,8 @@
                     "id": "60181f3f-1cf9-423d-9fb5-0ee3f8e36d51",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Cancel",
@@ -490,7 +498,8 @@
                     "id": "03bfe95e-a06a-4a25-93ff-7f73c0d30d4c",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [

@@ -29,7 +29,7 @@ public class PlayerStatus : EntityBehaviour, IDamageable
         currentStamina = maxStamina;
     }
 
-    private void LateUpdate()
+    private void Update()
     {
         if (isUsingStamina && currentStamina >= 0)
         {
